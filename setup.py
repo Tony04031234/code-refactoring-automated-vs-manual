@@ -1,12 +1,12 @@
-''' Run the command line that read all the student code '''
-''' generate the report including the code smells deteted '''
-''' export to a txt file '''
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Note: To use the 'upload' functionality of this file, you must:
 #   $ pip install twine
+
+''' Run the command line that read all the student code '''
+''' generate the report including the code smells deteted '''
+''' export to a txt file '''
 
 import io
 import os
@@ -18,7 +18,7 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = "code refactoring"
 DESCRIPTION = "Code Refactoring "
-URL = "https://github.com/molliem/gender-bias"
+URL = ""
 EMAIL = ""
 AUTHOR = ""
 REQUIRES_PYTHON = ">=3.6.0"
@@ -27,7 +27,7 @@ VERSION = "0.1.0"
 # What packages are required for this module to be executed?
 REQUIRED = [
     # TODO: Extend this list as further dependencies are determined
-
+    "spacy",
 ]
 
 # What packages are suggested for doing development?

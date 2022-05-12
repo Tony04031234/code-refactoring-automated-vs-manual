@@ -1,6 +1,3 @@
-spacy
-flask
-flask-cors
 
 [dev]
 pytest
