@@ -1,0 +1,4468 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include "math.h"
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector <int> howMany(int heads, int legs)
+	{
+		//int four = 4;
+		//int two = 2;
+		//int total_legs = 0;
+		//int chicken_count = 0;
+		//int iterator = 0;
+		//int res = 0;
+
+		int ho = 0;
+
+		//cout << heads << " " << legs << endl;
+
+		//cout << heads * 4 << endl;
+
+
+		vector <int> result;
+
+		int copy_head = heads;
+		while(heads > 0 )
+		{
+			int total_legs = heads * 4;
+
+			//cout << total_legs << " oi " << endl;
+			if (total_legs == legs && heads == copy_head)
+			{
+				//cout << " in 1" << endl;
+				ho = heads;
+				break;
+			}
+
+			else if (total_legs >= legs)
+			{
+				//cout << " in 2" << endl;
+				heads--;
+			}
+
+			else if ((legs - total_legs) % 2 == 0)
+			{
+				//cout << " in 3" << endl;
+				ho = heads;
+				break;
+			}
+			else
+			{
+				//cout << " in 4" << endl;
+				heads--;
+			}
+
+			//heads--;
+
+			
+
+			// cout << total_legs << endl;
+			// cout <<  heads << endl;
+			// cout << ho << endl << endl;
+		}
+
+		//cout << ho << endl;
+
+		if (heads <= 0 && ho * 4 != legs)
+		{
+			vector < int> empty;
+			empty.push_back(1);
+			//empty.push_back(2);
+			//cout << " in 5 " << endl;
+			//result 
+			//result.clear();
+			//cout << "here" << endl;
+			//empty.clear();
+			return empty;
+		}
+		else if(((ho*4) + ((copy_head - ho)*2))   !=  legs)
+		{
+			vector < int> empty;
+			empty.push_back(1);
+			//empty.push_back(2);
+			//cout << " in 5 " << endl;
+			//result 
+			//result.clear();
+			//cout << "here" << endl;
+			//empty.clear();
+			return empty;
+		}
+		else
+		{
+			//cout << " nah " << endl;
+		int cows = ho;
+		int chicken = copy_head - ho;
+
+		result.push_back(chicken);
+		result.push_back(cows);
+		return result;
+		}
+
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+class ChickensAndCows
+{
+public:
+	vector <int> howMany(int heads, int legs)
+	{
+		vector <int> v;
+		int templegs = legs;
+		int cows = 0;
+		int chicken = 0;
+		for (int i = heads; i > 0; --i)
+		{
+			vector <int> v;
+/*			cout<<"_________________________________________________________"<<endl;
+			cout<<"(cows*4)+(chicken*2) = "<<(cows*4)+(chicken*2)<<endl;
+			cout<<" i = "<<i<<endl;
+			cout<<" legs = "<<legs<<endl;*/
+			if( ((cows*4)+(chicken*2)) < templegs && legs/i>2) 
+			{
+				//cout<< "if"<<endl;
+				cows ++;
+				legs=legs-4;
+			}
+			else
+			{
+				//cout<<"else"<<endl;
+				chicken ++;
+				legs=legs-2;
+			}
+
+		}
+		if(legs == 0)
+		{
+			v.push_back(chicken);
+			v.push_back(cows);
+			return v;
+		}
+		else return v;
+		//cout<<"the total number of legs is " <<legs<<endl;
+
+	}	
+};
+/*int main()
+{
+	//vector<int> v;
+	howMany(10,42);
+	cout<<v.at(0)<<endl;
+	cout<<v.at(1)<<endl;
+
+	return 0;
+}*/
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+	public:
+		vector<int> howMany(int heads, int legs){
+			int TotalHeads = heads;
+			int TotalLegs = legs;
+			vector<int> ret;
+			int chickens = 0;
+			int cows = 0;
+			
+			if(legs/heads == heads){
+				chickens = 0;
+				cows = heads;
+				ret.push_back(chickens);
+				ret.push_back(cows);
+				return ret;
+			}
+
+			for(int i = 1; i <= TotalLegs/TotalHeads; i++){				
+				if(heads > 1 && legs > 2){
+					chickens++;
+					legs = legs - 2;
+					heads--;
+				}
+			}
+
+			TotalHeads = heads;
+			TotalLegs = legs;
+
+			for(int i = 1; i <= TotalHeads; i++){				
+				if(heads > 1 && legs > 4){
+					cows++;
+					legs = legs - 4;
+					heads--;
+				}
+			}
+			ret.push_back(chickens);
+			ret.push_back(cows);
+
+			return ret;
+		}	
+
+
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs){
+
+		vector<int> thismany;
+
+		int chickenleg = 2;
+		int cowleg = 4;
+		int chickens = 0;
+		int cows = 0;
+
+		bool check = false; 
+
+		int x = 0;
+		int counter= 0;
+
+		if( heads == 0 && legs == 0){
+
+			thismany.push_back(0);
+			thismany.push_back(0);
+			return thismany;
+		}
+
+		if(legs/cowleg == heads && legs%cowleg == 0){
+
+			thismany.push_back(0);
+			thismany.push_back(heads);
+
+			return thismany;
+
+		}
+		if(legs/chickenleg == heads && legs%chickenleg == 0){
+
+			thismany.push_back(heads);
+			thismany.push_back(0);
+			return thismany;
+
+		}
+		if(heads*4 < legs)
+		{
+			thismany.clear();
+			return thismany;
+		}
+
+		if (heads*2 > legs)
+		{
+			thismany.clear();
+			return thismany;
+		}
+		if (legs%2 != 0)
+		{
+			thismany.clear();
+			return thismany;
+		}
+
+
+		for(int i = 0; i < heads; i++){
+
+			chickens += 2;
+			counter++;
+
+			if((legs - chickens)%4 == 0){
+				cows = (legs-chickens)/4;
+				if(cows + counter == heads){
+					thismany.push_back(counter);
+					thismany.push_back(cows);
+					return thismany;
+				}
+			}
+
+		}
+
+		return thismany;
+		
+	}
+	
+	
+};
+#include <vector>
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs) {
+		vector<int> result;
+
+		// Chickens
+		if (legs/2 == heads) {
+			result.push_back(heads);
+			result.push_back(0);
+			return result;
+		// Cows
+		} else if (legs/4 == heads) {
+			result.push_back(0);
+			result.push_back(heads);
+		// Odd amount of legs.
+		} else if (legs % 2 != 0) {
+			return result;
+		} else {
+
+
+
+			result.push_back(2);
+			result.push_back(1);
+
+		}
+
+		return result;
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int head,int legs){
+		int chicken=0;
+		int cow=0;
+		vector<int> total;
+		if(legs/4==head){
+			chicken=0;
+			cow=legs/4;
+			total.push_back(chicken);
+			total.push_back(cow);
+		}
+		if(legs/2==head){
+			chicken=legs/2;
+			cow=0;
+			total.push_back(chicken);
+			total.push_back(cow);
+		}
+		if(legs/4!=head || legs/2!=head){
+			head=head-(legs/4)+1;
+			chicken=head;
+			cow=legs-(chicken*2)/4;
+			total.push_back(chicken);
+			total.push_back(cow);
+		}
+		if(legs==0 && head==0){
+			chicken=0;
+			cow=0;
+			total.push_back(chicken);
+			total.push_back(cow);
+		}
+		else{
+			total={};
+		}
+		return total;
+	}
+};
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> sum;
+		int count;
+		int add;
+		for(int i=0; i<=heads; i++){
+			for(int j=0; j<=heads-i; j++){
+				count = i*2 + j*4;
+				add = i+j;
+				if(count == legs && add == heads){
+					sum.push_back(i);
+					sum.push_back(j);
+				}
+			}
+		}
+		return sum;
+	}
+};
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+	public:
+
+	vector<int> howMany (int heads, int legs)
+	{
+		int cows = 0, chickens = 0;
+
+		/**
+		 * Make sure there is enough legs for all animals to
+		 * be chickens.
+		 */
+		if (heads > legs / 2 || legs % 2 != 0)
+			return {};
+
+		/**
+		 * Check for all cows or all chickens.
+		 */
+		if (legs % 4 == 0 && legs / 4 == heads)
+		{
+			return { 0, heads };
+		}
+
+		/**
+		 * Loop over all legs to find the corresponding animals
+		 */
+		for (int i = 0; i < legs / 4; ++i)
+		{
+			cout << "Heads : " << heads << endl;
+			cout << "Legs : " << legs << endl;
+			/**
+			 * Check if a cow can be counted and that the rest are
+			 * chickens, then return.
+			 */
+			if ((legs - 2) % 4 == 0)
+			{
+				legs -= 2;
+
+				++chickens;
+				--heads;
+
+				cows += legs / 4;
+				heads -= legs / 4;
+
+				break;
+			}
+
+			/**
+			 * Check if a chicken can be counted and that the rest
+			 * are cows, then return.
+			 */
+			else if ((legs - 4) % 2 == 0)
+			{
+				legs -= 4;
+
+				++cows;
+				--heads;
+
+				chickens += legs / 2;
+				heads -= legs / 2;
+
+				break;
+			}
+
+			/**
+			 * Add a cow to see whether any other combinations fit.
+			 */
+			else
+			{
+				legs -= 4;
+				--heads;
+
+				++cows;
+			}
+
+			// if (legs < 4 || heads < 1)
+			// 	return {};
+		}
+
+		if (legs < 0 || heads < 0)
+			return {};
+
+		return vector<int> { chickens, cows };
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany(int heads,int legs)
+	{
+		std::vector<int> v;
+		for (int i = 0; i <=heads; ++i)
+		{
+			int j=heads-i;
+				if (2*i+4*j==legs)
+					{
+						v.push_back(i);
+						v.push_back(j);
+					}
+					
+		}
+		return v;
+	}
+
+	
+};
+
+// int main()
+// {
+// 	ChickensAndCows C;
+// 	std::vector<int> v=C.howMany(1000000,4000000);
+// 	for (int i = 0; i < v.size(); ++i)
+// 	{
+// 		cout<<v[i];
+// 	}
+// 	cout<<endl;
+// }
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+	private:
+		vector<int> chnco;
+	public:
+
+		vector<int> howMany(int heads, int legs){
+			chnco.clear();
+			if (heads == 0 && legs == 0){
+				chnco.push_back(0);
+				chnco.push_back(0);
+				return(chnco);
+			}
+			chnco.clear();
+			if(legs %2 != 0 || legs <= 0 || heads * 4 < legs || heads > legs/2){
+				return(chnco);
+			}
+			chnco.push_back(0);
+			chnco.push_back(0);
+
+			while(heads != legs/2){
+
+				if(heads == legs/4){
+					chnco[1] = heads;
+					return(chnco);
+				}
+
+				chnco[1]++;
+				heads--;
+				legs = legs - 4;
+
+			}
+
+			chnco[0] = heads;
+			return(chnco);
+
+
+		}
+
+};
+
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows {
+	public:
+	vector<int> howMany(int heads, int legs) {
+		vector<int> answer;
+		int maxLegs = heads * 4;
+		int minLegs = heads * 2;
+		
+		//too many legs
+		if (legs > maxLegs) return answer;
+
+		//too little legs
+		if (legs < minLegs) return answer;
+
+		//abnormal animals not allowed
+		if (legs%2 != 0) return answer;
+
+		int cows = 0.5*(legs - (2*heads));
+		int chickens = heads - cows;
+		answer.push_back(chickens);
+		answer.push_back(cows);
+		return answer;
+	}
+};
+
+
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+class ChickensAndCows
+{
+  public:
+  std::vector <int> howMany(int heads, int legs)
+  {
+  	vector<int> res;
+  	int l = legs;
+
+  	if(legs%4==0){
+  		res[0]=0;
+  		res[1]=(legs/4);
+  		return res;
+  	}
+/*
+  	for(int i=0; i<heads;i++)
+  	{
+  		while(l/heads>=0){
+  			//chickens
+
+
+  		}
+  	}
+*/
+
+
+
+
+  }
+
+};
+#include <iostream>
+#include <vector>
+
+class ChickensAndCows{
+public:
+	std::vector<int> howMany(int heads, int legs)
+	{
+		//position 1 chickens position 2 cows
+		std::vector<int> numAnimals;
+		std::vector<int> v;
+		numAnimals.push_back(legs/2);
+		numAnimals.push_back(0);
+		int tempLegs 	= legs;
+		int counter 	= 1;
+
+		if(legs%2 == 1)
+		{
+			return v;
+		}
+
+		std::cout <<tempLegs <<std::endl;
+
+		while ((numAnimals.at(0)+numAnimals.at(1))!= heads)
+		{
+			if(numAnimals.at(0) <1)
+			{
+				return v;
+			}
+
+			numAnimals.at(1) ++;
+			numAnimals.at(0) = numAnimals.at(0) - 2;
+		}
+
+		if (numAnimals.at(0) <0)
+		{
+				return v;
+		}
+
+		return numAnimals;
+	}
+
+};
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector <int> howMany(int heads, int legs){
+		vector<int> array = {0,0}; 
+		vector <int> a;
+		int runHeads = 0;
+		int cowLegs = 0;
+		int chickenLegs = 0;
+		if (heads == 0 && legs == 0){
+			return array;
+		} else if (heads == 0 || legs == 0){
+			return a;
+		}
+		for (int i = heads; i >= 0; i--){
+			cowLegs = 4*i;
+			chickenLegs = 2*(heads-i);
+			if (cowLegs+chickenLegs == legs){
+				array[0] = heads-i;
+				array[1] = i;
+				return array;
+			}
+		}
+		return a;
+	}
+};
+#include <vector>
+using namespace std;
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads,int legs) {
+	vector<int> toReturn;
+	toReturn.push_back(0);
+	toReturn.push_back(0);
+	for(int i=0;i<heads;i++) {
+		if(legs%4==0) {
+			while(heads>0){
+				toReturn.at(1)=toReturn.at(1)+1;
+				legs=legs-4;
+				heads=heads-1;
+			}
+		}
+		if (heads-1>=0 && legs-2>=0) {
+			toReturn.at(0)=toReturn.at(0)+1;
+			heads=heads-1;
+			legs=legs-2;
+		}
+		if (heads-1>=0 && legs-4>=0) {
+			toReturn.at(1)=toReturn.at(1)+1;
+			heads=heads-1;
+			legs=legs-4	;
+		}
+		if (heads-1==0 && legs-2==0) {
+			toReturn.at(0)=toReturn.at(0)+1;
+			heads=heads-1;
+			legs=legs-2;
+		}
+		if (heads-1==0 && legs-4==0) {
+			toReturn.at(1)=toReturn.at(1)+1;
+			heads=heads-1;
+			legs=legs-4;
+		}
+	}
+	return toReturn;
+}
+};
+#ifndef CHICKENS_H
+#define CHICKENS_H
+
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs) {
+		vector<int> count;
+		if (legs %2 == 1) {
+			return count;
+		}
+		int a = legs/2 - heads;
+		if (a > heads) {
+			return count;
+		}
+		if (heads*2 > legs) return count;
+		count.push_back(heads-a);
+		count.push_back(a);
+		return count;
+	}
+};
+#endif
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int>howMany(int heads,int legs){
+		// int cows=0;
+		// vector<int> record;
+		// while(heads>=0&&legs%4!=0){
+		// 	heads--;
+		// 	cows++;
+		// 	legs-=2;
+		// }
+		// record.push_back(cows);
+		// record.push_back(heads);
+		// return record;
+		int cows=(legs-2*heads)/2;
+		int chickens=heads-cows;
+		// cout<<cows<<" "<<chickens;
+		vector<int> record;
+		if(cows<0||chickens<0){
+			return record;
+		}
+
+		if((legs-2*heads)%2!=0){
+			return record;
+		}
+		
+		record.push_back(chickens);
+		record.push_back(cows);
+		return record;
+
+
+	}
+};
+
+// int main(){
+// 	ChickensAndCows test;
+// 	int heads,legs;
+// 	cin>>heads>>legs;
+// 	vector<int> temp=test.howMany(heads,legs);
+// 	for (int i = 0; i < temp.size(); ++i)
+// 	{
+// 		/* code */cout<<temp[i]<<endl;
+// 	}
+// }
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> result;
+		int chickens = 0;
+		int cows = 0;
+		if(heads > legs){
+			return result;
+		}
+		if(heads == 0 || legs == 0){
+			return result;
+		}
+		if(legs%2 != 0){
+			return result;
+		}
+		while(heads > 0){
+			if(legs % 4 == 0 && (legs/4 == heads)){
+				heads--;
+				legs-=4;
+				cows++;
+			}
+			else if (legs % 2 == 0 && heads > 0){
+				heads--;
+				legs-=2;
+				chickens++;
+			}
+			else{
+				return result;
+			}
+		}
+		result.push_back(chickens);
+		result.push_back(cows);
+		return result;
+	}
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> result;
+		int chickens = 0;
+		int cows = 0;
+		if(heads > legs){
+			return result;
+		}
+		if(heads == 0 || legs == 0){
+			return result;
+		}
+		if(legs%2 != 0){
+			return result;
+		}
+		while(heads > 0){
+			if(legs % 4 == 0 && (legs/4 == heads)){
+				heads--;
+				legs-=4;
+				cows++;
+			}
+			else if (legs % 2 == 0 && heads > 0){
+				heads--;
+				legs-=2;
+				chickens++;
+			}
+			else{
+				return result;
+			}
+		}
+		result.push_back(chickens);
+		result.push_back(cows);
+		return result;
+	}
+};
+
+#ifndef CHICKENSANDCOWS_H
+#define CHICKENSANDCOWS_H
+
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		vector<int> result;  // Result of method
+
+		if (legs % 2 != 0) return result;  // If there are an odd number of legs
+		
+		int cowHeads = legs / 4;  // Number of cows
+		int chickenHeads = 0;  // Number of chickens
+		while (cowHeads >= 0)
+		{
+			if (4*cowHeads + 2*chickenHeads == legs && cowHeads + chickenHeads == heads)  // Solution found
+			{
+				result.push_back(chickenHeads);
+				result.push_back(cowHeads);
+				return result;
+			}
+
+			while (chickenHeads + cowHeads >= heads) cowHeads--;
+			chickenHeads++;
+		}
+
+		return result;  // No solution
+	}	
+};
+
+#endif
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector <int> howMany(int heads,int legs){
+	vector <int> result={};
+	int i=0;
+	int j=0;
+	for(i=0;i<heads;i++){
+		for(j=0;j<heads;j++){
+			if(((2*i)+(4*j)==legs)&&((i+j)==heads)){
+				//a=i;
+				 result={i,j};
+				// std::cout<<i<<" "<<j;
+				// result[0]=i;
+				// result[1]=j;
+			}
+		}
+	}
+	return result;
+	}
+};
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs);
+	
+};
+
+vector<int> ChickensAndCows::howMany(int heads, int legs){
+	int chicken;
+	int cow;
+	vector<int> empty;
+	vector<int> zero {0,0};
+	if(heads == 0 && legs == 0) {return zero;}
+	if(heads == 0 && legs != 0) {return empty;}
+	if(heads != 0 && legs == 0) {return empty;}
+	if(heads == 1 && legs != 4) {return empty;}
+	if(heads == 1 && legs != 2) {return empty;}
+	if(heads >= legs) {return empty;}
+
+	cow = (legs / 2) - heads;
+	if(legs % 2 != 0) {return empty;}
+	if(cow < 0) {return empty;}
+	if(cow > heads) {return empty;}
+	else{
+	chicken = heads - cow;
+	vector<int> count {chicken, cow};
+	return count;
+
+	}
+
+
+
+}
+#include <vector>
+
+class ChickenAndCows
+{
+public:
+	std::vector<int> howMany(int heads, int legs){
+		std::vector<int> result;
+		for (int i=0; i<=heads; i++){
+			if ((i*4+(heads-i)*2)==legs){
+				result.push_back(heads-i);
+				result.push_back(i);
+				return result;
+			}
+		}
+		return result;
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+ 
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> newarr;
+		int a = 0;
+		int b = 0;
+		if (legs%2!=0){
+			return newarr;
+		}
+	    else if (legs==0&&heads==0){
+	    	newarr.push_back(0);
+	    	newarr.push_back(0);
+	    	return newarr;
+	    }
+	    else if(legs%heads!=0){
+			for (int j = legs-4; j >=0; j=j-4){
+				b++;
+				if (j%(heads-b) == 0){
+					a = j/2;
+					newarr.push_back(a);
+					newarr.push_back(b);
+					if (a+b>heads){
+						vector<int> empty;
+						return empty;
+			        }
+			        a = 0;
+			        b = 0;
+			        return newarr;
+			    }
+			}        
+        }
+	}
+};
+	   
+
+
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <algorithm>
+
+class ChickensAndCows {
+public:
+	std::vector<int> howMany(int heads, int legs) {
+		std::vector<int> count;
+		int chickens = 0;
+		int cows = 0;
+		// std::cout << "Heads: " << heads << std::endl;
+		// std::cout << "Legs: " << legs << std::endl;
+
+		if(legs %2 != 0) {	//Base case
+			//std::cout << "Odd number of legs" << std::endl;
+			return {};
+		}
+
+		// if(legs %heads == 0) {	//Base case
+		// 	cows = heads;
+		// 	//std::cout << "Cows: " << cows << std::endl;
+		// 	count.push_back(chickens);
+		// 	count.push_back(cows);
+		// }
+
+		if(heads == 0 || legs == 0) {	//Base case
+			count.push_back(0);
+			count.push_back(0);
+			return {};
+		}
+
+		if(legs < heads) {
+			// std::cout << "Legs < Heads" << std::endl;
+			return {};
+		}
+
+		while(legs %4 == 0 && legs > 0) {	//Causing EOF error but working locally, temporarily comment out
+			// std::cout << "Testing cows" << std::endl;
+			cows++;
+			legs -= 4;
+			// std::cout << "Legs: " << legs << std::endl;
+			heads -= 1;
+			// std::cout << "Heads: " << heads << std::endl;
+			// std::cout << "Adding cow" << std::endl;
+		}
+		count.push_back(cows);
+		// std::cout << "\n";
+		// std::cout << "Heads: " << heads << std::endl;
+		// std::cout << "Legs: " << legs << std::endl;
+		while(legs %2 == 0 && legs > 0) {
+			// std::cout << "Testing chickens" << std::endl;
+			chickens++;
+			legs -= 2;
+			heads -= 1;
+			// std::cout << "Adding chicken" << std::endl;
+		}
+		count.push_back(chickens);
+		std::reverse(count.begin(), count.end());
+
+		if(heads < 0) {
+			return {};
+		}
+
+		// return count;
+		return {};
+	}
+};
+#include <iostream>
+#include <algorithm> 
+#include <stdio.h>      
+#include <math.h> 
+#include <string> 
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int>howMany(int heads, int legs){
+		vector<int> ans;
+		if(legs>heads*4 || legs<heads*2 || legs %2 != 0){
+			return ans;
+		}
+		int a = 4*heads;
+		int chicken = (a -legs)/2;
+		int cow = heads - chicken;
+		ans.push_back(chicken);
+		ans.push_back(cow);
+		return ans;
+	}
+};
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <numeric>
+#include <algorithm>
+
+using namespace std;
+ 
+ 
+class ChickenAndCows
+{
+  public:
+
+  std::vector <int> howMany(int heads, int legs)
+  {
+    int total_a = heads;
+    int cow = 0;
+    int chicken = 0;
+    std::vector<int> v;
+
+    if (legs % 2 == 1)
+    {
+      return v;
+    }
+    
+    for (int i = legs; i > 0; i-=4)
+    {
+      
+        cow++;
+        total_a--;
+      
+    }
+
+    chicken = total_a - cow;
+    
+    // v.push_back(chicken);
+    // v.push_back(cow);
+
+    // for (int i = 0; i < v.size(); ++i)
+    //     {
+    //       cout<<v[i]<<endl;
+    //     }
+
+    return v;
+  }
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows {
+
+	public:
+		
+		ChickensAndCows() {} 
+
+		vector<int> howMany(int heads, int legs) {
+
+			vector<int> res ;
+			
+			int chickens = 0 ;
+			int cows = legs / 4 ; // note: integer division
+
+			int remHeads = heads - cows ;
+			int remLegs = legs - 4 * cows ;
+			// cout << cows << " " << chickens << endl ;
+
+			while (remHeads!=0 || remLegs!=0) {
+			
+
+				chickens++ ;
+			 	remHeads = heads - cows - chickens;
+			 	remLegs = legs - 4 * cows - 2 * chickens ;
+				// cout << cows << " " << chickens << endl ;
+				
+				if (remHeads==0 && remLegs==0) { break ; }
+
+				cows-- ;
+				if (cows < 0) { return res ; }
+
+			 	if (remHeads==0 && remLegs==0) { break ; }
+
+			 	chickens++ ;
+			 	remHeads = heads - cows - chickens;
+			 	remLegs = legs - 4 * cows - 2 * chickens ;
+				// cout << cows << " " << chickens << endl ;
+			}
+
+			res.push_back(chickens) ;
+			res.push_back(cows) ;
+
+			return res;
+
+		}
+
+} ;
+
+#include <vector>
+
+class ChickensAndCows
+ {
+ public:
+ 	std::vector <int> howMany(int head, int legs) {
+ 		std::vector <int> number;
+ 		if (legs % 2 != 0 || head*4 < legs) {
+ 			return number;
+ 		}
+ 		if (legs-head*2<0) {
+ 			return number;
+ 		}
+ 		int cows;
+ 		int chickens;
+ 		if (head*4 == legs) {
+ 			cows = legs/4;
+ 			chickens = 0;
+ 		} else if (head*4 != legs) {
+ 			chickens = (head*4-legs)/2;
+ 			cows = head - chickens;
+ 		}
+ 		// number[0] = chickens;
+ 		// number[1] = cows;
+ 		number.push_back(chickens);
+ 		number.push_back(cows);
+ 		return number;
+ 	}	
+ }; 
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+  vector<int> howMany(int heads, int legs){
+    vector<int> v;
+    for (int i = 0; i <= heads; ++i)
+    {
+      if (i*4+(heads-i)*2==legs)
+      {
+        v.push_back(heads-i);
+        v.push_back(i);
+        return v;
+      }
+    }
+    return v;
+  }
+	
+};
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads,int legs){
+		int chicken=0;
+		int cow=0;
+        vector<int> res;
+        if (legs%2==1){
+        	return res;
+        }
+		chicken=(heads*4-legs)/2;
+		cow=heads-chicken;
+		if (chicken<0||cow<0){
+			return res;
+		}
+		res.push_back(chicken);
+		res.push_back(cow);
+		return res;
+	}
+};
+
+
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> animals;
+
+		for(int i = 0 ; i<heads; i++){
+			int chickens = i;
+			int cows = heads-i;
+			int legs_com = (cows*4)+(chickens*2);
+			if(legs_com == legs){
+				animals.push_back(chickens);
+				animals.push_back(cows);
+				return animals;
+			}
+		}
+		return animals;
+	}
+};
+#include <vector>
+using namespace std;
+vector<int> howMany(int heads,int legs){
+	vector<int> ans(0);
+	int ch;
+	int c;
+	if((legs-heads)%2==0){
+		c=(legs-heads)/2;
+		ch=heads-c;
+		ans.push_back(ch);
+	    ans.push_back(c);
+	}
+	return ans;
+}
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads,int legs)
+	{
+		//Returns {NumChickens,NumCows}
+		int numChickens=heads;
+		int numCows=0;
+
+		//Vector to return. 
+		vector<int> totals;
+		if(legs<heads*2 || legs>heads*4)
+		{
+			return totals;
+		}
+		while(heads<legs/2)
+		{
+			numCows++;
+			numChickens--;
+			legs=legs-2;
+		}
+		if(numChickens>=0)
+		{
+			totals.push_back(numChickens);
+			totals.push_back(numCows);
+		}
+		cout<<totals[0]<<" "<<totals[1]<<endl;
+	return totals;
+	}
+};
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+class ChickensAndCows {
+	
+	public:
+
+	vector<int>howMany( int heads, int legs){
+
+		int fourRem = legs % 4;
+		vector<int> count;
+		int cows = 0; 
+		int chickens = 0;
+
+
+		if (fourRem == 0)		//cows
+		{
+			if (heads >= (legs/4))
+			{
+				cows = legs/4;
+				legs = legs/4;
+				heads = heads - cows;
+			}
+			cout << cows << " "<< endl;
+			
+		}
+
+		if (fourRem % 2 == 0)		//chickens
+		{
+			if (heads >= (legs/2))
+			{
+				chickens = legs/2;
+				legs = legs/2;
+				heads = heads - chickens;
+			}
+			cout << chickens << " "<< endl;
+			
+		}
+		
+		else if(legs == 0 || heads == 0){
+			count.push_back(0);
+			count.push_back(0);
+		}
+
+
+		count.push_back(chickens);
+		count.push_back(cows);
+					
+		return count;
+	}
+
+};
+#include <iostream>
+#include <cmath>
+#include <vector>
+using namespace std;
+class ChickensAndCows {
+public:
+vector<int> howMany(unsigned int heads, unsigned int legs){
+	unsigned int cows=0;
+	unsigned int chicks=0;
+	while(heads>=0){
+
+		if(heads<=0){
+			break;
+			legs=-1;
+		}
+		if((legs-4)>=0){
+			legs-=4;
+			heads-=1;
+			cows++;
+		}else if((legs-2)>=0 &&legs<4 ){
+			legs-=2;
+			heads-=1;
+			chicks++;
+		}
+		if(heads==1 && legs==0){
+			heads-=1;
+			cows-=1;
+			chicks+=2;
+		}
+		//cout<<legs<<endl;
+	}
+	vector<int> a;
+	if(legs==0 || legs>cows+chicks){
+		a.push_back(chicks);
+		a.push_back(cows);
+	}
+	return a;
+}
+};
+#include <vector>
+#include <iostream>
+
+using namespace std; 
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		if (heads == 0 && legs == 0)
+		{
+			vector<int> v;
+			v.push_back(0);
+			v.push_back(0);
+			return v;
+		}
+
+		for (int i = heads; i >= 0; --i)
+		{
+			int temp_heads = heads;
+			int temp_legs = legs;
+
+			int count = i;
+
+			while(temp_heads != 0)
+			{
+				//cow
+				if (count > 0)
+				{
+					temp_heads--;
+					temp_legs -= 4;
+					count--;
+				}
+				else //chicken
+				{
+					temp_heads--;
+					temp_legs -= 2;
+				}
+			}
+
+			if (temp_legs == 0)
+			{
+				vector<int> v;
+				v.push_back(heads-i);
+				v.push_back(i);
+				return v;
+			}
+		}
+
+		vector<int> v;
+		return v;
+
+	}
+	
+};
+#include <algorithm>
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <cctype>
+#include <stdlib.h>
+#include <stdio.h>
+using namespace std;
+class ChickensAndCows
+{
+	public:
+		vector<int> howMany(int heads,int legs){
+			int chickenleg=2;
+			int cowsleg=4;
+			int chickenhead=1;
+			int cowhead=1;
+			int chicken,cow;
+			vector<int> ans;
+			if(heads==0 || legs==0){
+				chicken=0;
+				cow=0;
+				ans.push_back(chicken);
+			ans.push_back(cow);
+			}else{
+			for (int i = 0; i < legs; ++i)
+			{
+				for(int j=0;j<legs;j++){
+					if(legs/(i*2+4*j)==1 && (i+j)==heads){
+						chicken=i;
+						cow=j;
+						ans.push_back(chicken);
+			           ans.push_back(cow);
+						
+					}
+					
+						
+					
+					}
+				}
+			}
+			
+			return ans;
+
+};
+		
+
+};
+#include <iostream> 
+#include <vector> 
+#include <string> 
+
+
+
+
+class ChickensAndCows
+{
+public: 
+	std::vector<int> howMany(int heads, int legs)
+	{
+		std::vector<int> returnVect; 
+		//returnVect.push_back(0); 
+		//returnVect.push_back(0); 
+		int chickenHead = (heads*2); 
+		int cowHead  = (heads*4); 
+		int tempor = legs/heads; 
+		int temporDiv = legs%heads; 
+
+
+		//std::cout<<returnVect[0]<<std::endl; 
+		//std::cout<<returnVect[1]<<std::endl; 
+
+
+		if(heads==1&legs==2)
+		{
+		returnVect.push_back(1); 
+		returnVect.push_back(0);  
+		}
+		else if(heads==1&legs==4)
+		{
+
+			returnVect.push_back(0); 
+			returnVect.push_back(1); 
+		}
+		else if(chickenHead<legs|| cowHead<legs)
+		{
+			return returnVect; 
+		}
+		else 
+		{
+			if(tempor==4&&temporDiv==0)
+		{
+			returnVect.push_back(0); 
+			returnVect.push_back(heads); 
+		}
+		
+		}		/*
+		else if(tempor==4&&temporDiv==0)
+		{
+			returnVect.push_back(0); 
+			returnVect.push_back(heads); 
+		}
+		else if(tempor==2&&temporDiv==0)
+		{
+
+			returnVect.push_back(heads); 
+			returnVect.push_back(0); 
+		}*/ 
+		/*else
+		{
+			int temp; 
+			temp = legs%heads; 
+			int  tempDiv; 
+			tempDiv = legs/heads; 
+			
+			if(temp==0)
+			{
+				if(tempDiv==4)
+				{
+					returnVect.push_back(0); 
+					returnVect.push_back(legs/tempDiv); 
+				}
+				else if(tempDiv==2)
+				{	
+					returnVect.push_back(legs/tempDiv); 
+					returnVect.push_back(0); 
+				}
+			}
+			else 
+			{
+				int store; 
+				store = tempDiv; 
+				
+				if(store==4)
+				{
+					store = store*4; 
+					tempor = legs-store; 
+					tempor = store/2; 
+					returnVect.push_back(tempor); 
+					returnVect.push_back(legs/heads); 
+
+				}
+				else
+				{
+					store = store*2; 
+					tempor = legs-store; 
+					tempor = store/4; 
+					returnVect.push_back(legs/heads); 
+					returnVect.push_back(tempor); 
+				}
+
+			}
+		} */
+				//returnVect.push_back(10); 
+		//returnVect.push_back(022); 
+
+		return returnVect; 
+	}
+
+}; 
+#include <iostream>
+#include <string>
+#include <vector>
+
+class ChickensAndCows{
+	public:
+	std::vector<int> howMany(int heads, int legs){
+		//1x + 1y = 3
+		//2x + 4y = 8
+
+		// std::cout << "heads: " << heads << " legs: " << legs << std::endl;
+
+		std::vector<int> animals;
+
+		int numOfAnimals = heads;
+		int numOfCows = (legs - (2 * heads)) / 2;
+		int numOfChickens = numOfAnimals - numOfCows;
+
+		if(numOfChickens >= 0 && (legs - (2 * heads)) % 2 == 0 && numOfCows >= 0){
+			animals.push_back(numOfChickens);
+			animals.push_back(numOfCows);
+		}
+
+		return animals;
+	}
+};
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector <int> howMany (int heads, int legs){
+		vector <int> result;
+		int chicken = 0;
+		int cow = 0;
+
+		chicken = (heads*4-legs)/2;
+		cow = heads - chicken;
+		result.push_back(chicken);
+		result.push_back(cow);
+
+
+		if( (legs%2!=0) || (heads*4<legs) || (cow<0) || (chicken<0)){
+			result.clear();
+		}
+
+		return result;
+	}
+};
+
+
+#ifndef CHICKENSANDCOWS_H
+#define CHICKENSANDCOWS_H
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+class ChickensAndCows {
+public:
+    vector<int> howMany(int heads, int legs) {
+        vector<int> result;
+        int chickenlegs = 2;
+        int cowlegs = 4;
+        int cows = 0;
+        // int chickens = 0;
+        if (heads == 0 && legs == 0) {
+            result.push_back(0);
+            result.push_back(0);
+            return result;
+        }
+
+        // chickens
+        for (int chickens = 0; chickens <= heads; chickens++) {
+            // cows
+            cows = heads-chickens;
+                // if (cows+chickens == heads) {
+                    if (((cows*cowlegs) + (chickens*chickenlegs)) == legs) {
+                        result.push_back(chickens);
+                        result.push_back(cows);
+                        return result;
+                    // }
+                }
+            }
+        }
+
+        // return result;
+    
+};
+
+#endif
+
+
+
+
+
+
+
+#include<vector>
+#include<string>
+#include<algorithm>
+#include<iostream>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int>howMany(int heads,int legs){
+		vector<int> v;
+		for(int i=0;i<heads;i++){
+			for(int j=0;j<heads;j++){
+				if(2*j+4*i==legs && i+j==heads){
+					if(j==0){
+						v.push_back(0);
+					}
+					 else if(j!=0){
+					 	v.push_back(j);
+					 }
+					 if(i==0){
+					 	v.push_back(0);
+					 }
+					 else if(i!=0){
+					 	v.push_back(i);
+				}
+				}
+				
+			}
+		}
+		if(legs==0 && heads==0){
+					v.push_back(0);
+					v.push_back(0);
+				}
+	
+			return v;
+		
+	}
+	
+};
+
+/*int main(int argc, char const *argv[])
+{
+	ChickensAndCows a;
+	std::vector<int> b=a.howMany(10,40);
+	for (int i = 0; i < b.size(); ++i)
+	{
+		cout<<b[i]<<",";
+	}
+	
+}*/
+#include <iostream>
+#include <vector>
+
+class ChickensAndCows{
+
+	public:
+		std::vector<int> howMany(int heads, int legs){
+
+			std::vector<int> result;
+
+			if(heads==0 && legs ==0){
+				result = {0,0};
+				return result;
+			}
+
+			if(legs <= heads){
+				return result;
+			}
+
+			if(heads==0 || legs==0){
+				return result;
+			}
+
+			else if(legs%2==1){
+				return result;
+			}
+
+			else{
+
+				int cows = 0;
+				int chickens = 0;
+
+				int op1 = ((legs/4) + legs%4);
+				int op2 = ((legs/2) + legs%2);
+				if(op1 == heads){
+					result = {0,legs/4};
+					return result;
+				}
+
+				else if(op2 == heads){
+					result = {legs/2,0};
+					return result;
+				}
+
+				else{
+					int currentLegs = 0;
+					int totalHeads = 0;
+					cows = heads;
+
+					while(cows >= 0){
+
+						cows--;
+						currentLegs -= 2;
+						chickens++;
+						totalHeads = cows + chickens;
+
+						currentLegs = (cows*4) + (chickens*2);
+
+						if(currentLegs == legs && totalHeads== heads){
+
+							if(chickens>=0 && cows>=0){
+								result = {chickens,cows};
+							}
+							break;
+						}
+					}
+				}
+
+			}
+
+			return result;
+		}
+
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+	public:
+		vector<int> howMany(int heads,int legs)
+		{
+			vector<int> answer;
+
+			if (heads == 0 && legs == 0)
+			{
+				answer.push_back(0);
+				answer.push_back(0);
+
+				return answer;
+			}
+
+			if ((legs%2 == 1) || ((4*heads) < legs) || (heads > legs) || (heads <=0) || (legs <=0) || (2*heads > legs))
+
+			{
+				return answer;
+			}
+
+			int newhead = 4*heads;
+			int newlegs = legs;
+			int numcows = 0;
+
+			int chickenheads = heads*2;
+			int cowheads = heads*4;
+
+			
+			if (chickenheads == legs)
+			{
+				answer.push_back(heads);
+				answer.push_back(0);
+
+				return answer;
+			}
+			if (cowheads == legs)
+			{
+				answer.push_back(0);
+				answer.push_back(heads);
+
+				return answer;
+			}
+
+			while (2*newlegs != newhead)
+			{
+				//cout << "works" << endl;
+				newhead = newhead-4;
+				newlegs = newlegs-4;
+				numcows++;
+				//cout << numcows << " " << newhead << " " << legs << endl;
+			}
+
+			heads = heads-numcows;
+			answer.push_back(heads);
+			answer.push_back(numcows);
+
+			return answer;
+		}
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector <int> howMany(int heads, int legs){
+		vector<int> test;
+
+		if(legs>heads){
+
+		} 
+		else {cout << " "<< endl;}
+	}
+
+};
+
+
+#ifndef CHICKENSANDCOWS_H
+#define CHICKENSANDCOWS_H
+
+#include <math.h>
+#include <vector>
+#include <iostream>
+
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany(int heads, int legs)
+	{
+		std::vector<int> chicksCows;
+		if (legs%2==1)
+		{
+			return chicksCows;
+		}
+		int remainLegs = legs-heads*2;
+		if (remainLegs%2==1)
+		{
+			return chicksCows;
+		}
+		int chicks = (legs-remainLegs*2)/2;
+
+		int cows = heads-chicks;
+		if (chicks<0 || cows<0)
+		{
+			return chicksCows;
+		}
+		// cows = cows/2;
+		// chicks = chicks-cows;
+		chicksCows.push_back(chicks);
+		chicksCows.push_back(cows);
+	}
+};
+
+#endif
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+	public:
+	vector<int> howMany( int heads, int legs )
+	{
+		vector<int> ChickenAndCow;
+		int Cows, Chickens;
+		int remainder;
+		int condition;
+
+
+		if ( legs % 2 == 0)
+		{
+			Cows = legs / 4;
+			remainder = legs % 4;
+			Chickens = remainder / 2;
+			while ( remainder % 2 != 0 || Cows + Chickens != heads)
+			{
+				Cows--;
+				Chickens += 2;
+				if ( Cows < 0 )
+				{
+					return ChickenAndCow;
+				}
+			}
+			ChickenAndCow.push_back(Chickens);
+			ChickenAndCow.push_back(Cows);
+			return ChickenAndCow;
+		}
+		else
+		{
+			return ChickenAndCow;
+		}
+
+
+		return ChickenAndCow;
+	}
+};
+
+#include <vector>
+#include <iostream>
+
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany(int heads,int legs){
+		std::vector<int> number;
+		int legcount=legs;
+		int headscount=heads;
+		int Chicken=0;
+		int cow=0;
+
+		if(legs==0 && heads==0){
+			return number;
+		}
+		else{
+			while(1){
+				if(headscount==0){
+					break;
+				}
+				if(cow*4<legs && headscount!=0){
+					cow++;
+					headscount--;
+					legcount-=4;
+				}
+				else{
+					break;
+				}
+			}
+			// cout<<Chicken<<" "<<cow<<" "<<headscount<<" "<<legcount<<endl;
+			
+			for(int i=0;i<headscount;i++){
+				cow--;
+				headscount++;
+			}
+			if(headscount==0 &&legcount>0){
+				return number;
+			}
+			legcount=headscount*4;
+			// cout<<legcount<<" 123414"<<endl;
+			while(legcount!=0){
+				if(headscount==0){
+					break;
+				}
+				if(Chicken*2!=legcount){
+					Chicken++;
+					headscount--;
+					cout<<Chicken<<endl;
+				}
+				else{
+					break;
+				}
+			}
+
+		}
+		if(headscount==0 &&legcount>0){
+				return number;
+		}
+		number.push_back(Chicken);
+		number.push_back(cow);
+		return number;
+	}	
+	
+};
+
+
+// int main(){
+// 	std::vector<int> v;
+// 	ChickensAndCows a;
+// 	v=a.howMany(10,42);
+// 	for(int i=0;i<v.size();i++){
+// 		cout<<v.at(i);
+// 	}
+// 	cout<<endl;
+
+// }
+#include <vector>
+
+class ChickensAndCows {
+public:
+	std::vector<int> howMany(int numHeads, int numLegs) {
+		int legs;
+		int heads;
+		std::vector<int> result;
+		if(numHeads == 0 && numLegs == 0) {
+			result.push_back(0);
+			result.push_back(0);
+			return result;
+		}
+		if(numHeads == 0 || numLegs == 0 || numLegs%2 != 0) {
+			return result;
+		}
+		//i = chickens, j = cows 
+		for(int i = 0; i < numHeads; i++) {
+			legs = (i*2)+((numHeads-i)*4);
+			if(legs == numLegs) {
+				result.push_back(i);
+				result.push_back(numHeads-i);
+				return result;
+			}
+		}
+		return result;
+	}
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		/*int numChickens = 0;
+		int numCows = 0;
+		vector<int> animals;
+
+		int sum = 0;
+		while (sum <= legs){
+			if (sum == legs){
+				animals.push_back(numChickens);
+				animals.push_back(numCows);
+				return animals;
+			}
+
+			sum = sum+4;
+			numCows = numCows + 1;
+			if (sum > legs){
+				sum = sum-2;
+				numCows = numCows -1;
+				numChickens = numChickens + 1;
+			}
+		}
+		return animals;*/
+
+		int i = 0;
+		int j = heads;
+		int sum;
+		vector<int> animals;
+
+		for (i; i <= heads; i++){
+			sum = i*2 + j*4;
+			if (sum == legs){
+				animals.push_back(i);
+				animals.push_back(j);
+				return animals;
+			}
+			j = j -1;
+		}
+		if ((heads == 0) && (legs == 0)){
+			animals.push_back(0);
+			animals.push_back(0);
+		}
+		return animals;
+
+	}
+};
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany(int heads, int legs)
+	{
+		std::vector<int> animals;
+		int numCows = (legs-2*heads)/2;
+		if (heads >= legs || (legs-2*heads)%2 == 1 || heads-numCows < 0 || numCows < 0)
+		{
+			return animals;
+		}
+		animals.push_back((heads-numCows));
+		animals.push_back(numCows);
+		return animals;
+	}
+};
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany(int heads,int legs)
+	{
+		int ch=0;
+		int cow=0;
+		int h=0;
+		int l=0;
+		int length=heads+1;
+		for(int i=0;i<length;i++)
+		{
+			for(int j=0;j<length;j++)
+			{
+
+				if((h==heads) && (l==legs))
+				{
+					ch=i;
+					cow=j;
+				}
+				else
+				{
+					i++;
+					j++;
+				}
+				h=i+j;
+				l=2*i+4*j;
+			}
+		}
+		std::vector<int> res(ch,cow);
+		return res;
+	}
+};
+#pragma once
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs){
+
+					
+		vector<int> animals;
+		
+		double h_double = double(heads);
+		double l_double = double(legs);
+		double cows;
+		double chickens;
+
+		
+		cows = (l_double-2*h_double)/2;
+
+			
+		if (round(cows)==cows && cows <= heads && cows >= 0 )
+		{
+		 	chickens = heads-cows;
+			animals.push_back(int(chickens));
+			animals.push_back(int(cows));
+		}
+
+		return animals;
+	}
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		int cows=legs-2*heads;
+		cows=cows/2;
+		int chickens=heads-cows;
+		vector<int> count;
+		if(chickens>=0 && cows>=0)
+		{
+			count.push_back(chickens);
+			count.push_back(cows);
+		}
+		return count;
+	}
+};
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		int chickens = 0, cows = 0;
+		vector<int> animals;
+
+		if(heads*2==legs)
+		{
+			animals.push_back(heads);
+			animals.push_back(0);
+			return animals;
+		}
+		if(heads*4==legs)
+		{
+			animals.push_back(0);
+			animals.push_back(heads);
+			return animals;
+		}
+
+		int temp = heads*2;
+		chickens = heads;
+
+		if(temp>legs)
+		{
+			return animals;
+		}
+
+		while(temp<legs)
+		{
+			temp+=2;
+			cows++;
+			chickens--;
+		}
+
+		if(cows*4+chickens*2!=legs || chickens<0)
+		{
+			return animals;
+		}
+
+		animals.push_back(chickens);
+		animals.push_back(cows);
+		return animals;
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+class ChickensAndCows
+{
+	public :
+	vector<int> howMany(int heads, int legs)
+	{
+		vector<int> Numbers;
+		int chicken=0;
+		int cow=0;
+		if(heads*2 ==legs)
+		{
+			Numbers.push_back(heads);
+			Numbers.push_back(0);
+			return Numbers;
+		}
+
+		else if(heads*4==legs)
+		{
+			Numbers.push_back(0);
+			Numbers.push_back(heads);
+			return Numbers;
+		}
+
+		else if(heads*4<legs || ((heads*4)-legs)%2 !=0)
+		{
+			return Numbers;
+		}
+		else
+		{
+			cow=heads;
+			int assumeallcow=cow*4;
+			int range=assumeallcow-legs;
+			chicken=range/2;
+			cow=heads-chicken;
+			if(chicken<0 || cow<0)
+			{
+				return Numbers;
+			}
+			else
+			{
+				Numbers.push_back(chicken);
+				Numbers.push_back(cow);
+				return Numbers;
+			}
+
+		}
+	}
+
+};
+#ifndef CHICKENSANDCOWS_HPP
+#define CHICKENSANDCOWS_HPP
+
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs){
+		int nCows;
+		int nChickens;
+
+
+		nCows = (legs - 2*heads)/2;
+		nChickens = heads - nCows;
+
+		vector<int> results;
+		
+		if(nCows >= 0 && nChickens >= 0 && legs%2==0){		
+			results = {nChickens,nCows};
+		}
+		return results;
+	}
+};
+
+#endif
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows {
+	public:
+		vector<int> howMany(int heads, int legs){
+		vector<int> res;
+	    int x, y;
+	    if (legs % 2) return res;
+	    y = legs / 2 - heads;
+	    x = heads - y;
+	    if ((x < 0) || (y < 0)) return res;
+	    res.push_back(x);res.push_back(y);
+	    return res;
+		}
+	};
+
+#include <vector>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		int nChickens = 0;
+		int nCows = 0;
+
+		vector<int> results;
+
+		if(legs % 2 != 0) return results;
+		if(heads < 1 || legs < 1)
+		{
+			results.push_back(nChickens);
+			results.push_back(nCows);
+			return results;
+		}
+
+		while(legs > 0)
+		{
+			//all cows
+			if (legs % 4 == 0 && legs / 4 == heads)
+			{
+				nCows = legs/4;
+				results.push_back(nChickens);
+				results.push_back(nCows);
+				return results;
+			}
+
+			//all chickens
+			if (legs / 2 == heads)
+			{
+				nChickens = legs/2;
+				results.push_back(nChickens);
+				results.push_back(nCows);
+				return results;
+			}
+
+			nChickens++;
+			heads--;
+			legs = legs - 2;
+
+			if(heads < 1) return results;
+			if(legs < 1)	return results;
+			
+		}
+
+		return results;
+		
+	};
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int cowA = -1;
+int chickenA = -1;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs) {
+		cowA = -1;
+		chickenA = -1;
+		if (legs >= heads) {
+			manyCall (heads, legs, 0, 0);
+		}
+		vector<int> ans;
+		if (cowA != -1 && chickenA != -1) {
+			ans.push_back(chickenA);
+			ans.push_back(cowA);
+		}
+		return ans;
+	}
+
+	void manyCall(int heads, int legs, int chicken, int cows) {
+
+		int curLegs = (chicken*2)+(cows*4);
+		int curHeads = chicken+cows;
+		//cout << cows << " " << chicken << endl;
+		if (curHeads == heads) {
+			if (curLegs == legs) {
+				cowA = cows;
+				chickenA = chicken;
+			}
+			return;
+		}
+		if (curLegs > legs) {
+			return;
+		}
+		if (curHeads > heads) {
+			return;
+		}
+		if ((legs-curLegs)%4 == 0) {
+			manyCall(heads, legs, chicken, cows+1);
+		} else {
+			manyCall(heads, legs, chicken+1, cows);
+		}
+	}
+};
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class ChickensAndCows{
+
+	public:
+	vector<int> howMany(int heads,int legs){
+
+        int chickens=0;
+        int cows=0;
+        vector<int> count;
+        cows=(legs-2*heads)/2;
+        chickens=heads-cows;
+       // cout<<"heads"<<heads<<endl;
+       // cout<<"legs"<<legs<<endl;
+       // cout<<"chi"<<chickens<<endl;
+        //cout<<"cow"<<cows<<endl;
+
+        if((chickens+cows==heads)&&(2*chickens+4*cows==legs)&&(cows>=0)&&(chickens>=0)){
+            count.push_back(chickens);
+           count.push_back(cows);
+        }
+        //if(count.size()!=0){
+        //cout<<count[0]<<endl;
+        //cout<<count[1]<<endl;
+   // }else{
+     //   cout<<"dsdsf"<<endl;
+   // }
+
+
+
+		return count;
+
+	}
+};
+#include <iostream>
+#include <vector>
+#include <math.h>
+#include <string>
+#include <algorithm>
+using namespace std;
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads,int legs){
+		vector<int> v;
+		int arr[100];
+		for(int i=heads;i>-1;i--){
+			for(int j=0;j<=heads;j++){
+				if(i+j==heads){
+					if(i*2+j*4==legs){
+						v.push_back(i);
+						v.push_back(j);
+					}
+				}
+			}
+		}
+		for(int i=0;i<v.size();i++){
+			cout<<v[i]<<endl;
+		}
+		//return arr;
+	}
+};
+// int main(){
+// 	int h;
+// 	int l;
+// 	cin>>h;
+// 	cin>>l;
+// 	ChickensAndCows x;
+// 	cout<<x->howMany(h,l)<<endl;
+// }
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows {
+public:
+
+vector<int> howMany(int heads,int legs){
+	int numberCow = 0;
+	int numberChicken = 0;
+		vector<int> result;
+
+ 	if (legs/4 == heads && legs%4 == 0){
+ 		numberCow = heads;
+ 	} else if(legs/2 == heads && legs%2 == 0){
+ 		numberChicken = heads;
+ 	} else {
+         numberChicken = 1;
+         numberCow = heads-1;
+ 	while (numberChicken*2 + numberCow*4 != legs){
+         numberChicken++;
+         numberCow = heads-numberChicken;
+         if (numberChicken  > heads)
+         {
+               return result;
+         }
+ 	    }
+ 	}
+ 
+  	result.push_back(numberChicken);
+ 	result.push_back(numberCow);
+    return result;
+}
+};
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+#include <bitset>
+#include <math.h>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs) {
+
+		int cows;
+		int chickens;
+		int sum;
+		vector<int> ret;
+
+		for (int i = 0; i <= heads; i++) {
+			
+			cows = 4*i;
+			chickens = 2*(heads-i);
+
+			sum = cows+chickens;
+
+			if (legs == sum) {
+				ret.push_back(heads-i);
+				ret.push_back(i);
+			}
+		}
+
+		return ret;
+
+	}
+}; 
+#include <vector>
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> animals;
+		int chickens=0;
+		int cows=0;
+		bool works=false;
+		int count;
+
+		if(heads>legs){
+			return animals;
+		} else if(heads==0 && legs==0){
+			animals.push_back(0);
+			animals.push_back(0);
+			return animals;
+		}
+
+
+		while(legs/4!=heads && fmod(legs,4.0)!=0){
+			if(legs%4!=0){
+				chickens++;
+				legs=legs-2;
+			}
+
+			count++;
+			if(count>legs){
+				return animals;
+			}
+		}
+
+
+
+		cows=legs/4;
+
+		animals.push_back(chickens);
+		animals.push_back(cows);
+
+		for(int i=0;i<2;i++){
+			cout << animals[i] << endl;
+		}
+		
+		return animals;
+	}
+};
+#include<vector>
+
+class ChickensAndCows {
+public:
+	std::vector<int> howMany(int h, int l) {
+		std::vector<int> empty;
+		std::vector<int> animal;
+		animal.push_back(0);
+		animal.push_back(0);
+		while ( h > 0 && l >= 2) {
+			if (4*h==l) {
+				l-=4;
+				h-=1;
+				animal[1]++;
+				continue;
+			}
+			if (2*h==l) {
+				l-=2;
+				h-=1;
+				animal[0]++;
+				continue;
+			}
+			h-=1;
+			l-=4;
+			animal[1]++;
+		}
+		if (l != 0 || h != 0 ) {
+			return empty;
+		}
+		return animal;
+	}
+};
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <cctype>
+#include <cstdlib>
+using namespace std;
+
+class ChickensAndCows {
+public:
+
+    // Is digit
+    string dig(string d_O) {
+        for (unsigned int i = 0; i < d_O.length(); i++) {
+            if (isdigit(d_O[i])) {
+                continue;
+            }
+            else {
+                d_O.erase(i,1);
+            }
+        }
+        return d_O;
+    }
+
+    // Print
+    void p(vector<int> a) {
+        for (unsigned int i = 0; i < a.size(); i++) {
+            cout << a[i];
+        }
+    }
+
+    // String to Vector
+    vector<string> s2v(string input) {
+        string tmp, vS;
+        vector<string> iV;
+
+        istringstream ss(input);
+
+        while(getline(ss, tmp, ' ')) {
+            stringstream ss(tmp);
+            ss >> vS;
+            iV.push_back(vS);
+        }
+        return iV;
+    }
+
+    // Int to vector
+    vector<int> i2V(string input) {
+        vector<int> iV;
+        int returnValue;
+        string tmp;
+
+        for (unsigned int i = 0; i < input.size(); i++) {
+            stringstream convert;
+            convert << input[i];
+            convert >> returnValue;
+            iV.push_back(returnValue);
+        }
+        return iV;
+    }
+
+    vector<int> howMany(int heads, int legs) {
+        int legsTally = legs;
+        int headsTally = heads;
+        int cows = 0;
+        int chickens = 0;
+        vector<int> combo;
+        vector<int> error;
+
+        if (legs % 2 == 1 || heads * 4 < legs) {
+            return error;
+        }
+        
+
+        for (int i = 0; i < heads; ++i) {
+            if (legsTally % 4 == 0 && legsTally % headsTally == 0) {
+                legsTally -= 4;
+                cows++;
+            }
+            else {
+                legsTally -= 2;
+                chickens++;
+            }
+            headsTally--;
+        }
+
+        combo.push_back(chickens);
+        combo.push_back(cows);
+
+        if (chickens + cows != heads) {
+            return error;
+        }
+
+        return combo;
+
+    }
+
+};
+#include <iostream>
+#include <vector>
+#include "math.h"
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		vector<int> output;
+		double val = (legs - heads*2.0) / 2.0;
+		if(val>floor(val) && val <ceil(val))
+			return output;
+
+		int num_cows = (legs - (heads*2))/2;
+		int num_chickens = heads - num_cows;
+
+		if(num_chickens < 0 || num_cows<0)
+			return output;
+		
+		output.push_back(num_chickens);
+		output.push_back(num_cows);
+
+		return output;
+	}
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+  public:
+
+    vector<int> howMany(int heads, int legs){
+
+      vector<int> result;
+
+      //immediately return if legs are uneven
+      if(legs%2 != 0 || heads > legs){
+
+        return result;
+
+      }
+
+      if(legs > heads*4){
+        return result;
+      }
+
+      // //all chickens
+      // if((legs/2)%(heads) == 0 && legs/2 == heads){
+
+      //   result.push_back(heads);
+      //   result.push_back(0);
+      //   return result;
+      // }
+
+      // //all cows
+      // if((legs/4)%(heads) == 0 && legs/4 == heads){
+      //   result.push_back(0);
+      //   result.push_back(heads);
+      //   return result;
+      // }
+      result = {0,0};
+
+      int chickens = 0;
+      int cows = heads*4;
+      legs -= cows;
+
+      while(legs < 0){
+        chickens++;
+        cows--;
+        legs+= 2;
+      }
+
+      cows = heads - chickens;
+
+      result = {chickens,cows};
+      return result;
+    }
+
+};
+
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class ChickensAndCows
+{
+    public:
+    vector<int> howMany(int head, int legs)
+    {
+    	vector<int> animals;
+
+        int animalTest[2];
+        animalTest[0] = head*2;
+        animalTest[1] = head*4;
+
+        if(animalTest[0] == legs)
+        {
+            animals.push_back(head);
+            animals.push_back(0);
+            return animals;
+        } else if(animalTest[1] == legs)
+        {
+            animals.push_back(0);
+            animals.push_back(head);
+            return animals;
+        } else if(head == 0 && legs == 0)
+        {
+            animals.push_back(0);
+            animals.push_back(0);
+            return animals;
+        }
+
+        int tester[2] = {0,0};
+        tester[1] = legs/2 - head;
+        tester[0] = head - tester[1];
+
+        if(tester[0] > 0 && tester[1] > 0) {
+            if((tester[0]*2 + tester[1]*4) == legs)
+            {
+                animals.push_back(tester[0]);
+                animals.push_back(tester[1]);
+            }
+        }
+        
+
+        
+        return animals;
+    }
+};
+
+#include <cmath>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+class ChickensAndCows {
+	public:
+	vector<int> howMany(int heads, int legs) {
+		int chickens = 0;
+		int cows = 0;
+		vector<int> res(2);
+		if (heads*2 > legs) {
+			return vector<int>();
+		} else if (heads*4 < legs) {
+			return vector<int>();
+		}
+
+		while (heads*2 < legs ) {
+			cows++;
+			legs -= 4;
+			heads--;
+		}
+
+		if (legs > 0 && heads == 0) {
+			return vector<int>();
+		}
+
+		//cout << heads << " " << legs << endl;
+		chickens = legs/2.0;
+		legs -= 2*chickens;
+		heads -= chickens;
+
+		if (legs != 0 || heads != 0) {
+			return vector<int>();
+		}
+
+		res[0] = chickens;
+		res[1] = cows;
+
+		//cout << chickens << " " << cows << endl;
+		return res;
+	}
+};
+# include <iostream>
+# include <string>
+# include <vector>
+using namespace std;
+ 
+ 
+class ChickensAndCows
+{
+  public:
+  vector<int> howMany(int heads,int legs)
+  {
+  	vector<int> result;
+  	long double temp = (long double) heads/legs;
+    if ((heads== 0) && (legs == 0))
+    {
+      result.push_back(0);
+      result.push_back(heads);
+      return result;
+    }
+    if (heads*4 < legs)
+    {
+      return result;
+    }
+    if (heads*2 > legs)
+    {
+      return result;
+    }
+    if (legs % 2)
+    {
+      return result;
+    }
+    if (heads < 1)
+    {
+      return result;
+    }
+    if (legs < 1)
+    {
+      return result;
+    }
+    if (heads*4 == legs)
+    {
+      result.push_back(0);
+      result.push_back(heads);
+      return result;
+    }
+    if (heads*2 == legs)
+    {
+      result.push_back(heads);
+      result.push_back(0);
+      return result;
+    }
+  	long double tempcow = temp*4;
+  	long double tempchi = temp*2;
+  	result.push_back( tempcow/(tempcow+tempchi)*heads);
+  	result.push_back( tempchi/(tempcow+tempchi)*heads);
+    
+    return result;
+  }
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+class ChickensAndCows{
+public:
+	std::vector<int> howMany(int heads, int legs){
+		std::vector<int> retVec;
+		//assume all chickens.
+
+		if(((legs%2) != 0)){
+			return retVec;
+		}
+		int tempLegs = (legs - (heads*2));
+		int numCows = (tempLegs/2);
+		if(heads-numCows < 0){
+			return retVec;
+		}
+		if(numCows < 0){
+			return retVec;
+		}
+		retVec.push_back(heads - numCows);
+		retVec.push_back(numCows);
+
+		return retVec;
+	}
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+ 
+class ChickensAndCows
+{
+  public:
+  vector <int> howMany(int heads, int legs)
+  {
+  	vector<int> res;
+    if (legs % 2 == 0)
+    {
+      int cow = legs/2 - heads;
+      int chicken = 2*heads - legs/2;
+      {
+        if (cow >= 0 && chicken >= 0)
+        {
+          res.push_back(chicken);
+          res.push_back(cow);
+        }
+      }
+    }
+    return res;  // return your result
+  }
+};
+#include <vector>
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs){
+		int cow = heads;
+		int chk = 0;
+		while((chk>=0)&&(cow>=0)){
+			if((cow*4 + chk*2)==legs){
+				vector<int> res;
+				res.push_back(chk);
+				res.push_back(cow);
+				return res;
+			}
+			cow--;
+			chk++;
+		}
+
+		vector<int> empty;
+		return empty;
+	}
+	
+};
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iterator>
+
+using namespace std;
+
+class ChickensAndCows{
+
+public:
+	vector<int> howMany( int heads, int legs ){
+
+		vector<int> number = {};
+
+		int cows = 0.5*legs - heads;	
+		int chickens = 2*heads - 0.5*legs;
+
+		int calcHeads = chickens + cows;
+		int calcLegs = 4*cows +	2*chickens;
+
+		if( calcHeads != heads || calcLegs != legs || chickens < 0 || cows < 0 )
+			return number;
+
+		number.push_back( chickens );
+		number.push_back( cows );
+
+		return number;
+	}
+
+};
+
+#include <vector>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		int cows = legs/2 - heads;
+		int chichens = heads - cows;
+
+		vector<int> total;
+
+		if ( cows < 0 || chichens < 0 || legs%2 != 0 )
+		{
+			return total;
+		}
+
+		total.push_back(chichens);
+		total.push_back(cows);
+
+		return total;
+	}
+};
+#include <string>
+#include <vector>
+#include <iostream>
+
+
+using namespace std;
+
+class ChickensAndCows{
+
+public:
+//code submitted 
+/*
+	int ans;
+	int rC;
+	int legCount(int h, int l){
+
+			ans = (l/2);
+			if (ans > h){
+				rC++;
+				legCount(h - 1, l - 4);
+			}
+			else{
+				return rC;
+			}
+		}
+
+
+
+	vector<int> howMany(int head, int legs){
+		vector<int> v;
+
+		if((head < legs) || ( legs % 2 == 1 )){
+			return v;
+
+		}
+
+
+		int cow = 0;
+		
+		int chicken = 0;
+
+
+			ans = legCount(head, legs);
+
+			chicken = legs/2;
+
+			v.push_back(chicken);
+			v.push_back(cow);
+
+			return v;
+
+
+		
+
+
+	}
+	*/
+
+	vector<int> howMany(int head, int legs){
+		//cout << "heads: " << head << endl;
+		//cout << "legs: " << legs << endl;
+
+		vector<int> v;
+		int chicken = 0;
+		int cow = 0;
+
+
+		//edge case
+		
+		if( (head * 4 < legs || head * 4 > legs) && (head * 2 < legs || head * 2 > legs) ){
+			//cout << "'empty'" << endl;
+			return v;
+		}
+
+		/*		
+		if( (head * 4) < legs ){
+			//cout << "'empty set'" << endl;
+			return v;
+		}
+		*/
+		if(head * 4 == legs){
+			cout << 0 << head << endl;
+				v.push_back(0);
+				v.push_back(head);
+				return v;
+		}
+
+
+		if( (head * 4 < legs || head * 4 > legs) && (head * 2 < legs || head * 2 > legs) ){
+			return v;
+		}
+
+		int totalHeads = head;
+		for(int i = 0; i < totalHeads; i++){
+
+			if (legs / 4 == head){
+				//cout << "Legs = " << legs << endl;
+				cow++;
+				legs -= 4;
+				head--;
+			}
+			else{
+				chicken++;
+				legs -= 2;
+				head--;
+			}	
+		}
+		v.push_back(chicken);
+		v.push_back(cow);
+
+		//cout << chicken << cow << endl;
+		return v;
+
+	}
+};
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+vector<int> result(2);
+int cows = 0;
+int chickens = 0;
+
+class ChickensAndCows{
+	public:
+
+		vector<int> howMany(int heads, int legs)
+		{
+			
+			
+			if(heads == 0){
+				return result;
+			}
+
+			else
+			{
+				if(legs - 4 != 0){
+					cows++;
+					result.at(0) = cows;
+					return howMany(heads -= 1, legs -= 4);
+
+				}
+
+				if(legs - 4 == 0)
+				{
+					chickens++;
+					result.at(1) = chickens;
+					return howMany(heads -= 1, legs -= 2);
+
+				}
+			}
+
+		}
+		
+
+};
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs){
+		int chickens = 0;
+		int cows = 0;
+
+		if(heads == 0 && legs == 0){
+			return {0,0};
+		} else if(heads < 1 || legs < 1){
+			return {};
+		}
+
+		// chickens = 2 * heads;
+		// // cout << 2 * heads << endl;
+		// chickens -= legs/2;
+		// cout << chickens - legs/2 << endl;
+		// cout << (legs - 2 * heads)%2 << endl;
+
+		if((legs - 2 * heads) % 2 == 0){
+			cows = legs / 2;
+			cows -= heads;
+			chickens = 2 * heads - legs/2;
+			cows = legs / 2 - heads;
+		} else {
+			return {};
+		}
+
+		if(chickens < 0 || cows < 0){
+			return {};
+		}
+		return {chickens, cows};
+	}	
+};
+// -std=c++11
+#include <string>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		int chickens;
+		int cows;
+		vector<int> ans;
+		cows = (legs - 2 * heads) / 2;
+		chickens = heads - cows;
+		if (chickens >= 0 && legs % 2 == 0 && cows >= 0)
+		{
+			ans.push_back(chickens);
+			ans.push_back(cows);
+		}
+		return ans;
+	};
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs){
+		bool feasible = false;
+		for(int cow=0; cow<=heads; cow++){
+			int totalLeg = cow*4 + (heads-cow)*2;
+			if(totalLeg == legs){
+				return {heads-cow, cow};
+				feasible = true;
+				break;
+			}
+		}
+		if(feasible == false){
+			return {};
+		}
+	}
+};
+#include <iostream>
+#include <vector>
+
+#ifndef CHICKENSANDCOWS_H
+#define CHICKENSANDCOWS_H
+
+class ChickensAndCows{
+
+public:
+
+	std::vector<int> howMany(int heads, int legs){
+
+		int cows = 0;
+		int chickens = 0;
+		std::vector<int> res = {};
+
+		for(int i = 0; i <= heads;i++){
+			cows = i;
+			chickens = heads-i;
+
+			if(((cows*4)+(chickens*2)) == legs){
+				res.push_back(heads-i);
+				res.push_back(i);
+				return res;
+			}
+		}
+
+		return res;
+	}
+
+};
+#endif
+
+#include <sstream>
+#include <string>
+#include <vector>
+#include <map>
+#include <algorithm>
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <utility>
+#include <set>
+#include <cctype>
+#include <queue>
+#include <stack>
+using namespace std;
+
+//g++ -std=c++98 ChickensAndCows.cpp -o ChickensAndCows
+//./ChickensAndCows
+
+
+class ChickensAndCows{
+public:
+    vector<int> howMany(int heads, int legs){
+        int tmp=legs;
+        int cows=0;
+        int chickens=0;
+        int h=heads;
+        vector<int> num;
+        if(heads*4==legs){
+            num.push_back(0);
+            num.push_back(heads);
+            return num;
+        }
+        else if(heads*2>legs){
+            //num.push_back(0);
+            //num.push_back(0);
+            return num;
+        }
+        else if(heads*4>legs){
+            while(tmp-2>=0 && h-1>=0){
+                tmp=tmp-2;
+                chickens+=1;
+                h-=1;
+                if(h*4==tmp){
+                    cows=h;
+                    num.push_back(chickens);
+                    num.push_back(cows);
+                }
+            }
+        }
+        
+
+        if(tmp==0){
+            
+            num.push_back(chickens);
+            num.push_back(cows);
+        }
+        return num;
+    }
+};
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> animals;
+
+		//check for odds
+		if(legs % 2 != 0){
+			return animals;
+		}
+
+
+
+		// if all are cows
+		/*if(legs / heads == 4){
+				animals.push_back(0);
+				animals.push_back(heads);
+				return animals;
+			}*/
+
+		//assume all cows at first
+		int counter = 0;
+		animals.push_back(0);
+		animals.push_back(heads);
+		while(counter < heads){
+			int chickenLegs = animals[0] * 2;
+			int cowLegs = animals[1] * 4;
+
+			if(chickenLegs+cowLegs == legs){
+				return animals;
+			} else {
+				counter++;
+				animals[0]++;
+				animals[1]--;
+			}
+		}
+
+		animals.pop_back();
+		animals.pop_back();
+		//animals.clear();
+		//cout << animals.size() << endl;
+		return animals;
+
+	}
+
+};
+#include <iostream>
+#include <vector>
+#include <math.h>
+
+
+using namespace std;
+
+class ChickensAndCows
+{
+  public:
+    vector<int> howMany(int heads, int legs)
+    {
+        vector<int> result;
+        int cows = 0;
+        int chickens = 0;
+
+        // impossible cases
+        if ( 4*heads > legs || 2*heads > legs ){
+            return result;
+        }
+
+        chickens = legs%heads;
+        cows = heads - chickens;
+
+        result.push_back(chickens);
+        result.push_back(cows);
+
+        return result;
+    }
+};
+
+
+#include <vector>
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany (int heads, int legs)
+{
+	int cows = 0;
+	int chickens =0;
+	std::vector<int> result;
+	while (cows < heads)
+	{
+		if (legs%2 == 0 && legs%(heads-cows) == 0)
+		{
+
+			if (legs/(heads-cows) == 2)
+			{
+				chickens = heads - cows;
+				break;
+			}
+		}
+		legs -= 4;
+		cows++;
+	}
+	if (cows >= heads){
+		return result;
+	}
+
+	result.push_back (chickens);
+	result.push_back (cows);
+	return result;
+}	
+};
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include "math.h"
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int>howMany(int h,int l){
+		int x  =	0;
+		int y  =	0;
+		vector<int> ans;
+
+		y  = (l-2*h)/2;
+		x = h - y;
+
+		if(h==0 && l == 0){
+			ans.push_back(0);
+			ans.push_back(0);
+			return ans;
+		}
+
+		else if(y>h || x > h){
+			return ans;
+		}
+
+		else if( l % 2 != 0 ){
+			return ans;
+		}
+		else{
+		ans.push_back(x);
+		ans.push_back(y);
+
+		return ans;
+
+	}
+}
+	
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	
+	vector<int> howMany(int heads, int legs){
+
+		vector<int> v;
+
+		int chicken = 0;
+		int cow = 0;
+
+	/*	if (2*heads == legs){
+			
+			chicken = heads;
+
+		}else if (4*heads == legs){
+
+			cow = heads;
+
+		}else */if ( 4*heads >= legs && 2*heads <= legs && legs%2 == 0 ){
+
+			int sub = legs - heads*2;
+
+			cow = sub/2;
+
+			chicken = heads - cow;
+
+		}else{
+
+			//cout<<"check"<<endl;
+			cout<<""<<endl;
+			return v;
+
+		}
+
+		v.push_back(chicken);
+		v.push_back(cow);
+		cout<<v[0]<<" "<<v[1]<<endl;
+
+		return v;
+
+	}
+};
+
+
+
+/*int main(){
+
+	int heads = 10;
+	int legs = 40;
+
+	vector<int> v = howMany(heads, legs);
+	//cout<<v[0]<<" "<<v[1]<<endl;
+
+	return 0;
+
+}*/
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> res;
+		if(heads == 0 && legs == 0){
+			res.push_back(0);
+			res.push_back(0);
+			return res;
+		}
+		int chickens = 0;
+		int cows = 0;
+		while (heads>0){
+			if(legs%4!=0 || legs/4!=heads){
+				if(legs<2){
+					return res;
+				}
+				heads--;
+				chickens++;
+				legs-=2;
+
+			} else {
+				break;
+			}
+		}
+		if(heads == 0 && legs>0){
+			return res;
+		}
+		
+		cows = legs/4;
+		res.push_back(chickens);
+		res.push_back(cows);
+		return res;
+	}
+};
+#include <vector>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+
+class ChickensAndCows {
+
+public: 
+
+	vector<int> howMany (int heads, int legs) {
+
+		vector<int> ret;
+		int chicken = 0;
+		int cow = 0; 
+
+		for(int i = 0; i < heads; i++) {
+
+			if(legs >= 2 && heads > 0) {
+
+				for(int j = 0; j < legs; j++) {
+
+					if(heads > 0) {
+
+						if(legs % 4 == 0 && (heads - legs/4 == 0)) {
+
+							cow += legs/4;
+							heads = heads - cow;
+							legs = 0;
+
+						}
+						else if(legs % 2 == 0 && (heads - legs/2 == 0)) {
+
+							chicken += legs/2;
+							heads = heads - cow;
+							legs = 0;
+						}
+						else if (legs % 4 == 2 && heads > 1) {
+
+							cow += 1;
+							chicken += 1;
+							heads -= 2;
+							legs -= 6; 
+
+						}
+						else {
+
+							chicken += 1;
+							heads -= 1;
+							legs -= 2; 
+						}
+					}
+				}	
+			}
+			else {
+				break;
+			}
+    }	
+
+    	if(legs > 0 || heads > 0) {
+
+    		return ret; 
+    	} 
+    	else {
+
+    		// cout << chicken << endl;
+    	// cout << cow << endl;
+    	// cout << heads << endl;
+    	// cout << legs << endl; 
+  		ret = {chicken, cow};
+
+
+		return ret;
+
+    	}
+
+    	
+
+	}
+
+
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+	public:
+		vector<int> howMany(int heads, int legs) {
+
+			vector<int> result;
+			int cows = 0;
+			int chickens = 0;
+			bool solved = false;
+
+			if (heads * 4 < legs || legs % 2 != 0)
+				return result;
+
+			while(!solved) {
+
+				if (legs == 0 && heads != 0) {
+
+					return result;
+
+				} else if (legs == 0 && heads == 0) {
+
+					solved = true;
+
+				} else if (legs / heads == 2 && legs % heads == 0) {
+
+					chickens = heads;
+					solved = true;
+
+				} else {
+
+					cows++;
+					legs -= 4;
+					heads--;
+
+				}
+
+			}
+
+			result.push_back(chickens);
+			result.push_back(cows);
+
+			return result;
+		}
+
+};
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows{
+	public:
+	vector<int> howMany(int heads, int legs){
+		vector<int> res;
+		int x = heads;
+		int y = legs;
+
+		int ch;
+		int co;
+
+		co = (y-2*x)/2;
+		ch = x -co;
+
+		if((y-2*x)%2 != 0){
+			return res;
+		} else if( co < 0 || ch < 0){
+			return res;
+		} else {
+			res.push_back(ch);
+			res.push_back(co);
+			return res;
+		}
+	}
+};
+nclude <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+	public:
+		vector<int> howMany(int heads, int legs){
+			int chicken=0;
+			int cow=0;
+
+			while(legs%4==0){
+				if(heads==0&&legs==0){
+					break;
+				}
+				cow += 1;
+				legs -= 4;
+				heads -= 1;
+
+				if(heads>legs){
+					legs += 4;
+					cow -= 1;
+					chicken = legs/2;
+					
+					break;
+				}
+			}
+			if(legs%4!=0){
+					vector<int> c;
+					return c;
+			}
+			vector<int> b;
+			b.push_back(chicken);
+			b.push_back(cow);
+			return b;
+		}
+};
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class ChickensAndCows
+{
+  public:
+  	vector<int>howMany(int heads,int legs){
+  		int x=0;
+  		int y=0;
+  		// x+y=heads;svn 
+  		// 2*x+4*y=legs;
+
+  		int temp=legs-(2*heads);
+  		if(temp%2!=0){
+  			vector<int> empty;
+  			return empty;
+  		}
+
+  		y=temp/2;
+  		x=heads-y;
+  		if(heads==0){
+  			vector<int> zero;
+  			zero.push_back(0);
+  			zero.push_back(0);
+  			return zero;
+  		}else if(y+x!=heads || x<0 || y<0 || legs<4 ){
+  			vector<int> empty;
+  			return empty;
+  		}
+  		
+
+
+
+  		vector<int> result;
+  		result.push_back(x);
+  		result.push_back(y);
+  		return result;
+  	}
+};
+
+#ifndef ChickensAndCows_hpp
+#define ChickensAndCows_hpp
+#include <vector>
+
+class ChickensAndCows{
+
+	public:
+		std::vector<int> howMany(int heads, int legs){
+			std::vector<int> number;
+			int values[2];
+			int numCows = 0;
+			int numChickens = 0;
+			if (legs%2 != 0){
+				return number;
+			}
+			while (numCows*4 < legs){
+				numCows++;
+			}
+			while ((numCows*4 + numChickens*2) != legs){
+				numCows--;
+				numChickens++;
+			}
+			if (numCows < 0 || numChickens < 0){
+				return number;
+			} else {
+				values[0] = numChickens;
+				values[1] = numCows;
+				number.assign (values, values+2);
+				return number;
+			}
+		}
+};
+#endif
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+public:
+	vector<int> howMany(int heads,int legs){
+		int cows;
+		int chickens;
+		int headcount = heads;
+		int legcount = legs;
+		vector<int> empty;
+
+		while(headcount>0){
+			if(legcount%2==1){
+			cout << " " << endl;
+			return empty;
+			}
+			cows = cows+1;
+			headcount = headcount-1;
+			legcount = legcount-4;
+			if((legcount/2)==headcount){
+				chickens = chickens + (legcount/2);
+				headcount=0;
+			}
+			
+			
+		}
+		if (chickens*2+cows*4==legs){
+			vector<int> res = {chickens,cows};
+			cout << chickens << " " << cows << endl;
+			return res; 
+		}
+		else{
+			return empty;
+		}
+
+	}
+};
+#include "debug.h"
+
+class ChickensAndCows {
+public:
+	std::vector<int> howMany(int heads, int legs) {
+		std::vector<int> ans;
+		//Suppose i is the number of chickens and j is number of cows
+		for(int i=0; i<=heads; i++) {
+			int totalLegs = i*2 + (heads-i) * 4;
+			if(totalLegs == legs) {
+				ans.push_back(i);
+				ans.push_back(heads-i);
+			}
+		}
+		return ans;
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows{
+
+	public:
+	vector<int> howMany(int heads, int legs){
+
+		int remain;
+
+		int chickens = heads;
+		int cows = 0;
+
+		vector<int> result;
+
+		while(chickens>=0){
+
+			remain = (chickens*2)+(cows*4)-legs;
+			if(remain==0){
+				cout<<"chickens: "<<chickens<<", cows: "<<cows<<endl;
+				result.push_back(chickens);
+				result.push_back(cows);
+				break;
+			}				
+
+			chickens--;
+			cows++;
+			
+		}
+
+		return result;
+
+	}
+
+};
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows {
+public:
+	vector<int> howMany(int heads, int legs) {
+		int chickens = 0;
+		int cows = 0;
+		
+
+		int rem_legs = legs;
+
+		for(int i = 0; i < heads; i++) {
+			chickens++;
+			rem_legs -= 2;
+		}
+
+		while(rem_legs > 0) {
+			chickens--;
+			cows++;
+			rem_legs -= 2;
+		}
+
+		if( (rem_legs != 0) || (cows < 0) || (chickens < 0) ) {
+			return {};
+		}
+
+		return {chickens,cows};
+	}
+};
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads,int legs){
+		vector<int> v;
+		int cows = 0;
+		int Chickens = 0;
+		if (legs%4 == 0 && legs/4 == heads){
+			v.push_back(0);
+			v.push_back(legs/4);
+			return v;
+		}
+		else if (heads == 2 && legs == 4)
+		{
+			v.push_back(2);
+			v.push_back(0);
+			return v;
+		}
+		else if (heads == 1 && legs == 2)
+		{
+			v.push_back(2);
+			v.push_back(0);
+			return v;
+		}
+		else if (legs/2 == heads)
+		{
+			v.push_back(heads);
+			v.push_back(0);
+			return v;			
+		}
+		while(cows<heads){
+			cows++;
+		}
+		while(cows*4+Chickens*2 > legs){
+			cows--;
+			Chickens++;
+		}
+		if (Chickens+cows == heads && cows*4+Chickens*2 == legs && Chickens > 0 && cows > 0)
+		{
+
+			v.push_back(Chickens);
+			v.push_back(cows);
+			return v;
+		}
+		else{
+			return v;
+		}
+
+	}
+	
+};
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class ChickensAndCows
+{
+public:
+	vector<int> howMany(int heads, int legs)
+	{
+		int animal, chickens, chickenLegs, cows, cowLegs;
+		vector<int> result;
+
+		animal = chickens = cows = 0;
+		chickenLegs = 2;
+		cowLegs = 4;
+
+		if (legs % 2 != 0 || legs == 0 || heads == 0) {
+			return result;
+		}
+
+		if (legs / cowLegs == heads) {
+			result.push_back(0);
+			result.push_back(heads);
+			return result;
+
+		} else if (legs / chickenLegs == heads) {
+			result.push_back(heads);
+			result.push_back(0);
+			return result;
+		}
+
+		for (int i = 1; i <= heads; i++) {
+			legs -= cowLegs;
+			for (int j = 1; j <= heads-i; j++) {
+				legs -= chickenLegs;
+				if (legs == 0 && j == heads-i) {
+					result.push_back(j);
+					result.push_back(i);
+					return result;
+				}
+			}
+
+			result.push_back(0);
+			result.push_back(i);
+		}
+
+		return result;
+	}
+};
+#include <iostream>
+#include <vector>
+
+class ChickensAndCows
+{
+public:
+	std::vector<int> howMany(int heads, int legs) {
+
+		std::vector<int> toReturn;
+
+		if (heads * 4 == legs)
+			{
+				toReturn.push_back(0);
+				toReturn.push_back(heads);
+				return toReturn;
+			} else if (heads * 2 == legs) {
+				toReturn.push_back(heads);
+				toReturn.push_back(0);
+				return toReturn;
+			}
+
+		for (int i = heads; i > 0; --i)
+		{
+			
+
+			if (i * 4 < legs && (heads - i) * 2 == legs - (i * 4))
+			{
+				toReturn.push_back(heads - i);
+				toReturn.push_back(i);
+				return toReturn;
+			}
+
+
+
+		}
+
+		
+
+		return toReturn;
+	}
+	
+};
